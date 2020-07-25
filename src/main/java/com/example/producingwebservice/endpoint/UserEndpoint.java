@@ -1,7 +1,6 @@
 package com.example.producingwebservice.endpoint;
 
 import com.example.producingwebservice.repository.UserRepository;
-import com.jfilter.components.FilterProvider;
 import com.jfilter.filter.FieldFilterSetting;
 import io.spring.guides.gs_producing_web_service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,28 +20,21 @@ public class UserEndpoint {
         this.userRepository = userRepository;
     }
 
-    private FilterProvider filterProvider;
-
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    @Autowired
-    public void setFilterProvider(FilterProvider filterProvider) {
-        this.filterProvider = filterProvider;
-    }
-
     @FieldFilterSetting(className = User.class, fields = {"id", "password"})
     @FieldFilterSetting(className = Address.class, fields = {"id"})
     @FieldFilterSetting(className = Street.class, fields = {"id"})
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserRequest")
+    @FieldFilterSetting(fields = {"secretValue"})
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserRequestWithFiltering")
     @ResponsePayload
-    public GetUserResponse getUser(@RequestPayload GetUserRequest request) {
+    public GetUserResponse getUserRequestWithFiltering(@RequestPayload GetUserRequestWithFiltering request) {
         GetUserResponse response = new GetUserResponse();
         response.setUser(userRepository.findByEmail(request.getEmail()));
         return response;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserRequest2")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserRequestWithoutFiltering")
     @ResponsePayload
-    public GetUserResponse getUserWithoutFiltration(@RequestPayload GetUserRequest2 request) {
+    public GetUserResponse getUserRequestWithoutFiltering(@RequestPayload GetUserRequestWithoutFiltering request) {
         GetUserResponse response = new GetUserResponse();
         response.setUser(userRepository.findByEmail(request.getEmail()));
         return response;

@@ -14,7 +14,9 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @EnableWs
 @Configuration
+@SuppressWarnings("rawtypes")
 public class WebServiceConfig extends WsConfigurerAdapter {
+
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();

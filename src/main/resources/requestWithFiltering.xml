@@ -2,8 +2,8 @@
                   xmlns:gs="http://spring.io/guides/gs-producing-web-service">
     <soapenv:Header/>
     <soapenv:Body>
-        <gs:getUserRequest2>
+        <gs:getUserRequestWithFiltering>
             <gs:email>janedoe@gmail.com</gs:email>
-        </gs:getUserRequest2>
+        </gs:getUserRequestWithFiltering>
     </soapenv:Body>
 </soapenv:Envelope>

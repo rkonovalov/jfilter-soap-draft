@@ -46,16 +46,17 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>2.9.8</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.github.rkonovalov</groupId>
 			<artifactId>jfilter</artifactId>
 			<version>1.0.18</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.github.rkonovalov</groupId>
+			<artifactId>jfilter-soap</artifactId>
+			<version>1.0.18</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

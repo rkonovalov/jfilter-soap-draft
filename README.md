@@ -9,21 +9,31 @@ mvn jaxb2:xjc
 
 Endpoint url: http://localhost:8080/ws
 
-## Request
+## Request examples
 Sample requests could be found in src/main/resources
 
-### request.xml
-Filter of *id* fields in User, Address, Street classes
+### requestWithFiltering.xml
+This request runs "" endpoint which filters next fields
+```java
+    @FieldFilterSetting(className = User.class, fields = {"id", "password"})
+    @FieldFilterSetting(className = Address.class, fields = {"id"})
+    @FieldFilterSetting(className = Street.class, fields = {"id"})
+    @FieldFilterSetting(fields = {"secretValue"})
+```
+* Filter **id** and **password** fields from each **User** class
+* Filter **id** field from each **Address** class
+* Filter **id** field from each **Street** class
+* Filter **secretValue** field from all classes
 
-* Request
+* Request with filtering
 ```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
                   xmlns:gs="http://spring.io/guides/gs-producing-web-service">
     <soapenv:Header/>
     <soapenv:Body>
-        <gs:getUserRequest>
+        <gs:getUserRequestWithFiltering>
             <gs:email>janedoe@gmail.com</gs:email>
-        </gs:getUserRequest>
+        </gs:getUserRequestWithFiltering>
     </soapenv:Body>
 </soapenv:Envelope>
 ```
@@ -52,8 +62,8 @@ Filter of *id* fields in User, Address, Street classes
 </SOAP-ENV:Envelope>
 ```
 
-### request2.xml
-Example without any filtering
+### requestWithoutFiltering.xml
+Example without filtering
 
 * Request
 ```xml
@@ -61,9 +71,9 @@ Example without any filtering
                   xmlns:gs="http://spring.io/guides/gs-producing-web-service">
     <soapenv:Header/>
     <soapenv:Body>
-        <gs:getUserRequest2>
+        <gs:getUserRequestWithoutFiltering>
             <gs:email>janedoe@gmail.com</gs:email>
-        </gs:getUserRequest2>
+        </gs:getUserRequestWithoutFiltering>
     </soapenv:Body>
 </soapenv:Envelope>
 ```
